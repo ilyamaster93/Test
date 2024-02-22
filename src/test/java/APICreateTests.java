@@ -31,6 +31,8 @@ public class APICreateTests {
 
         ObjectMapper objectMapper = new ObjectMapper();
         PostModel pm = objectMapper.readValue(response.getBody().asString(), PostModel.class);
+        assertThat(pm.getName()).isEqualTo(jsonObject.get("name"));
+        assertThat(pm.getJob()).isEqualTo(jsonObject.get("job"));
     }
 
     @After

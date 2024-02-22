@@ -40,6 +40,8 @@ public class APITests {
 
         ObjectMapper objectMapper = new ObjectMapper();
         PostModel pm = objectMapper.readValue(response.getBody().asString(), PostModel.class);
+        assertThat(pm.getName()).isEqualTo(jsonObject.get("name"));
+        assertThat(pm.getJob()).isEqualTo(jsonObject.get("job"));
     }
 
     @Test
@@ -50,6 +52,8 @@ public class APITests {
 
         ObjectMapper objectMapper = new ObjectMapper();
         PutModel ptm = objectMapper.readValue(response.getBody().asString(), PutModel.class);
+        assertThat(ptm.getName()).isEqualTo(jsonObject.get("name"));
+        assertThat(ptm.getJob()).isEqualTo(jsonObject.get("job"));
     }
 
     @Test
@@ -60,6 +64,8 @@ public class APITests {
 
         ObjectMapper objectMapper = new ObjectMapper();
         PatchModel ptchm = objectMapper.readValue(response.getBody().asString(), PatchModel.class);
+        assertThat(ptchm.getName()).isEqualTo(jsonObject.get("name"));
+        assertThat(ptchm.getJob()).isEqualTo(jsonObject.get("job"));
     }
 
     @Test
