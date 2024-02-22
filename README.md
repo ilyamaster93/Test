@@ -18,15 +18,15 @@ mvn clean test -Dtest=APITests
 <summary>Run a single test method from a test class:</summary>
 
 ```shell
-mvn clean test -Dtest=getUsersList
+mvn clean test -Dtest=APIReadTests#getUsersList
 ```
 </details>
 
 <details>
-<summary>Run all test methods that match tag from a test classes:</summary>
+<summary>Run test suites:</summary>
 
 ```shell
-mvn clean test -Dgroups=""
+mvn clean test -Dtest=TestSuiteCreateAndUpdate
 ```
 </details>
 
