@@ -1,3 +1,9 @@
+import Models.GetModel;
+import Models.PatchModel;
+import Models.PostModel;
+import Models.PutModel;
+import com.fasterxml.jackson.core.JsonProcessingException;
+import com.fasterxml.jackson.databind.ObjectMapper;
 import endpoints.Endpoints;
 import endpoints.Routes;
 import io.restassured.response.Response;
@@ -22,7 +28,7 @@ public class APITests {
     }
 
     @Test
-    public void getUsersList() {
+    public void getUsersList() throws JsonProcessingException {
         Response response = Endpoints.getListOfUsers(Routes.get_url);
         assertThat(response.getStatusCode()).isEqualTo(200);
     }
@@ -32,6 +38,9 @@ public class APITests {
         Map<String,Object> jsonObject = JsonUtils.getJsonDataAsMap("post_create_request.json");
         Response response = Endpoints.createUser(Routes.post_url, jsonObject);
         assertThat(response.getStatusCode()).isEqualTo(201);
+
+        ObjectMapper objectMapper = new ObjectMapper();
+        PostModel pm = objectMapper.readValue(response.getBody().asString(), PostModel.class);
     }
 
     @Test
@@ -39,6 +48,9 @@ public class APITests {
         Map<String,Object> jsonObject = JsonUtils.getJsonDataAsMap("put_update_request.json");
         Response response = Endpoints.updateUser(Routes.put_patch_delete_url, jsonObject, "put");
         assertThat(response.getStatusCode()).isEqualTo(200);
+
+        ObjectMapper objectMapper = new ObjectMapper();
+        PutModel ptm = objectMapper.readValue(response.getBody().asString(), PutModel.class);
     }
 
     @Test
@@ -46,6 +58,9 @@ public class APITests {
         Map<String,Object> jsonObject = JsonUtils.getJsonDataAsMap("patch_update_request.json");
         Response response = Endpoints.updateUser(Routes.put_patch_delete_url, jsonObject, "patch");
         assertThat(response.getStatusCode()).isEqualTo(200);
+
+        ObjectMapper objectMapper = new ObjectMapper();
+        PatchModel ptchm = objectMapper.readValue(response.getBody().asString(), PatchModel.class);
     }
 
     @Test
